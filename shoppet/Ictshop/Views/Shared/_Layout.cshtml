@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Cửa hàng thú cưng</title>
+    <!--
+      - primary meta tag
+    -->
+    <meta name="title" content="Fairy Wing - Hight Quality Pet Food">
+    <meta name="description" content="This is an eCommerce html template made by codewithsadee">
+    @using Ictshop.Models
+
+    <!--
+      - favicon
+    -->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <!--
+      - custom css link
+    -->
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+    <!--
+      - google font link
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&family=Nunito+Sans:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <!--
+      - preload images
+    -->
+    @*<img src="~/assets/images/hero-banner.jpg" />*@
+    <link rel="preload" as="image" href="~/assets/images/hero-banner.jpg">
+
+</head>
+
+<body id="top">
+    @{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+    <!--
+      - #HEADER
+    -->
+    <!--
+          - #HEADER
+    -->
+    <header class="header" data-header>
+        <div class="container">
+            <button class="nav-toggle-btn" aria-label="toggle manu" data-nav-toggler>
+                <ion-icon name="menu-outline" aria-hidden="true" class="menu-icon"></ion-icon>
+                <ion-icon name="close-outline" aria-label="true" class="close-icon"></ion-icon>
+            </button>
+
+            <a href="#" class="logo">Fairy Wing</a>
+
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+
+                    <li class="navbar-item">
+                        <a href="/" class="navbar-link" data-nav-link>TRANG CHỦ</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="/Home/Product" class="navbar-link" data-nav-link>SẢN PHẨM</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="/Home/About" class="navbar-link" data-nav-link>GIỚI THIỆU</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="/Home/Contact" class="navbar-link" data-nav-link>LIÊN HỆ</a>
+                    </li>
+
+                </ul>
+                <a href="#" class="navbar-action-btn">Đăng nhập</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-box">
+                    <button class="btn-search" id="searchItem" aria-label="Search">
+                        <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                    <input type="text" id="searchInputItem" class="input-search" placeholder="Nhập từ khoá tìm kiếm...">
+                </div>
+                @{
+                    if (u != null)
+                    {
+                        <button class="action-btn dropdown" title="@u.Hoten" aria-label="User">
+                            @{var avatar = @u.Anhdaidien;}
+                            @{
+
+                                if (avatar != null)
+                                {
+                                    <a href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung  })" class="dropbtn">
+                                        <img style="width: 30px; height: 30px; border-radius: 50%" src="@u.Anhdaidien" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <ion-icon class="dropbtn" name="person-outline" true"></ion-icon>
+                                }
+                            }
+                            <div class="dropdown-content">
+                                <a href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung  })">@u.Hoten</a>
+                                <a href="/Donhangs">Đơn hàng</a>
+                                <a href="/User/DangXuat">Đăng Xuất</a>
+                            </div>
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="action-btn dropdown" title="Tài khoản" aria-label="User">
+                            <ion-icon class="dropbtn" name="person-outline" true"></ion-icon>
+                            <div class="dropdown-content">
+                                <div><a href="/User/Dangnhap">Đăng Nhập</a></div>
+                            </div>
+                        </button>
+
+                    }
+                }
+                <button title="Giỏ hàng" class="action-btn" aria-label="Search">
+                    @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+                </button>
+            </div>
+
+        </div>
+    </header>
+    @RenderBody()
+    <!--
+      - #FOOTER
+    -->
+    <footer class="footer" style="background-image: url('~/assets/images/footer-bg.jpg')">
+
+        <div class="footer-top section">
+            <div class="container">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">Fairy Wing</a>
+
+                    <p class="footer-text">
+                        Nếu bạn có bất kỳ câu hỏi nào, xin vui lòng liên hệ với chúng tôi tại
+                        <a href="mailto:support@gmail.com" class="link">huynhthingocnguyen@gmail.com</a>
+                    </p>
+
+                    <ul class="contact-list">
+
+                        <li class="contact-item">
+                            <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+
+                            <address class="address">
+                                240 Dã Tượng, Vĩnh Nguyên, Nha Trang - Khánh Hòa
+                            </address>
+                        </li>
+
+                        <li class="contact-item">
+                            <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+
+                            <a href="tel:+84373818709" class="contact-link">(+84)-35-6827-829</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="social-list">
+
+                        <li>
+                            <a href="https://www.facebook.com/trung2001.it" class="social-link">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-pinterest"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Công ty</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Sự nghiệp</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Về chúng tôi</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Liên hệ chúng tôi</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">FAQs</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Nhà cung cấp</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Chương trình liên kết</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Thông tin</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Cửa hàng trực tuyến</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Chính sách bảo mật</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Chính sách hoàn lại tiền</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">chính sách vận chuyển</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Điều khoản dịch vụ</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Thứ tự theo dõi</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Dịch vụ</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Chải chuốt</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Huấn luyện chó tích cực</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Dịch vụ thú y</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Bảo hiểm Petco</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Nuôi thú cưng</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Trung tâm tài nguyên</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+
+                <p class="copyright">
+                    &copy; 2023 Được thực hiện bằng ♥ bởi <a href="#" class="copyright-link">ngocnguyen</a>
+                </p>
+
+                <img src="~/assets/images/payment.png" width="397" height="32" loading="lazy" alt="payment method" class="img">
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!--
+      - #BACK TO TOP
+    -->
+
+    <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+        <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+    </a>
+
+
+
+
+
+    <!--
+      - custom js link
+    -->
+    <script src="~/assets/js/script.js" defer></script>
+    <!--
+      - ionicon link
+    -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+            integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6"
+            crossorigin="anonymous">
+    </script>
+    <script src="~/assets/js/index.js"></script>
+    <script src="~/assets/js/zoomsl.min.js"></script>
+    <script src="~/assets/js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchItem').click(function () {
+                var keyword = $('#searchInputItem').val().toLowerCase();
+                var found = false;
+
+                $('.grid-list li').each(function () {
+                    var productName = $(this).find('.card-title').text().toLowerCase();
+                    if (productName.includes(keyword)) {
+                        $(this).show();
+                        found = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+                if (!found) {
+                    $('#noResults').show();
+                } else {
+                    $('#noResults').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

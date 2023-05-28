@@ -1,0 +1,86 @@
+﻿@model Ictshop.Models.Nguoidung
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin-top: 100px;"></h2>
+<div class="hosocanhan">
+    <h2>HỒ SƠ CÁ NHÂN</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Ảnh đại diện
+            </dt>
+
+            <dd>
+                <img style="margin: 0 auto;" src=@Url.Content("~" + @Html.DisplayFor(model => model.Anhdaidien)) class="img-responsive" alt="" width="200" height="200" />
+
+            </dd>
+
+            <dt>
+                Họ và tên:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Hoten)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email):
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Dienthoai):
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Dienthoai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Diachi):
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Diachi)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <button class="btn-primary">
+            @Html.ActionLink("Chỉnh sửa hồ sơ", "Edit", new { id = Model.MaNguoiDung }, new { @style = "color:white;" })
+        </button>
+        @*@Html.ActionLink("Back to List", "Index")*@
+    </p>
+</div>
+<h2 style="margin-bottom: 100px;"></h2>
+<style type="text/css">
+    .hosocanhan{
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .btn-primary{
+        margin: 0 auto;
+        padding: 3px;
+        margin-bottom: 10px;
+        background-color: gray;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    dt {
+        float: left;
+    }
+    dl.dl-horizontal {
+        padding: 583px;
+        margin-top: -543px;
+        margin-bottom: -576px;
+    }
+</style>

@@ -1,0 +1,67 @@
+﻿@model Ictshop.Models.LoginModel
+
+@{ ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Hãy đăng nhập để sử dụng đầy đủ tính năng của Website</h2>
+<br />
+@using (Html.BeginForm("Dangnhap", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h2 style="text-align: center">ĐĂNG NHẬP</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.userMail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.userMail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.userMail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { type = "Password", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <h3 class="text-danger">@ViewBag.Fail</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" style="cursor: pointer;" value="Đăng nhập" class="btn btn-primary" />
+        </div>
+    </div>
+    <div>
+        @*@Html.ActionLink("Back to List", "")*@
+        <a href="/User/Dangky">Tạo tài khoản mới</a>
+    </div>
+</div>}
+
+<style type="text/css">
+    .form-control {
+        padding: 9px;
+        border-radius: 5px;
+        border: solid 1px;
+        width: 100%;
+    }
+    .form-horizontal {
+        width: 50%;
+        background-color: antiquewhite;
+        padding: 100px;
+        margin: auto;
+        margin-top: 100px;
+        box-shadow: black 0px 0.5px 4px 0px;
+        border-radius: 5px;
+        margin-bottom: 100px;
+    }
+    .col-md-offset-2.col-md-10 {
+        padding-top: 10px;
+        padding-bottom: 40px;
+    }
+    h3.text-danger {
+        text-align: center;
+        color: orangered;
+        margin-top: 10px;
+    }
+</style>

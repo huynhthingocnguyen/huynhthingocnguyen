@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Ictshop.Models.Chitietdonhang>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin-top: 100px;"></h2>
+<div class="donhangs">
+    <h2>Chi tiết đơn hàng</h2>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Đơn giá/1 sản phẩm
+            </th>
+            <th>
+                Thành tiền
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sanpham.Tensp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soluong)
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", item.Dongia) VNĐ
+                </td>
+                <td>
+                    @String.Format("{0:0,0}", item.Thanhtien) VNĐ
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<h2 style="margin-bottom: 100px;"></h2>
+<style type="text/css">
+    .donhangs {
+        margin: 0 auto;
+        width: 40%;
+        border: solid 1px;
+    }
+
+    tr td {
+        padding: 4px;
+        border: solid 1px;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #78e8cd;
+        border-radius: 5px;
+        padding: 2px;
+        text-align: center;
+    }
+</style>

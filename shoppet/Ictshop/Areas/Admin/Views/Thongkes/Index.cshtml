@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Ictshop.Models.Thongke>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+<center><h2 style="color:red">Top 5 khách hàng mua hàng nhiều nhất</h2></center>
+<br />
+
+<!-- Thêm một nút button với id "exportButton" -->
+<button id="exportButton">Xuất Excel</button>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Tổng tiền đã mua
+        </th>
+        <th>
+            Số lượng đơn hàng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tennguoidung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dienthoai)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.Tongtien) VNĐ
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluong)
+            </td>
+        </tr>
+    }
+</table>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6"
+        crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/exceljs/dist/exceljs.min.js"></script>
+<script>
+    // Gán sự kiện click cho nút button
+    document.getElementById("exportButton").addEventListener("click", function() {
+        // Gọi hàm để xuất dữ liệu ra Excel
+        exportToExcel();
+    });
+
+    // Hàm để xuất dữ liệu ra Excel
+    function exportToExcel() {
+        // Tạo đối tượng Excel mới
+        var excel = new ExcelJS.Workbook();
+        var sheet = excel.addWorksheet("Dữ liệu");
+
+        // Lấy các hàng trong bảng
+        var tableRows = document.querySelectorAll("table tr");
+
+        // Lấy tiêu đề từ các thẻ <th>
+        var headerRow = tableRows[0];
+        var headerCells = headerRow.querySelectorAll("th");
+        var headerData = [];
+
+        // Lấy giá trị từ các ô <th> và thêm vào mảng headerData
+        for (var k = 0; k < headerCells.length; k++) {
+            headerData.push(headerCells[k].innerText);
+        }
+
+        // Ghi tiêu đề vào sheet
+        sheet.addRow(headerData);
+
+        // Duyệt qua từng hàng trong bảng (bỏ qua hàng tiêu đề)
+        for (var i = 1; i < tableRows.length; i++) {
+            var rowData = [];
+            var cells = tableRows[i].querySelectorAll("td");
+
+            // Lấy giá trị từ từng ô và thêm vào mảng rowData
+            for (var j = 0; j < cells.length; j++) {
+                rowData.push(cells[j].innerText);
+            }
+
+            // Ghi dữ liệu vào sheet
+            sheet.addRow(rowData);
+        }
+
+        // Xuất file Excel
+        excel.xlsx.writeBuffer().then(function (buffer) {
+            var blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "Thong-ke-top-5-khach-hang-mua-nhieu.xlsx";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+
+</script>
+<style type="text/css">
+    #exportButton{
+    border-radius: 5px;
+    margin-bottom: 10px;
+    }
+</style>

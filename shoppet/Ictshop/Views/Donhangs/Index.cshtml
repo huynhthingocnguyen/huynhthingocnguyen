@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Ictshop.Models.Donhang>
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<h2 style="margin-top: 100px;"></h2>
+<div class="donhangs">
+    <h2>Danh sách đơn hàng</h2>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Tình trạng đơn hàng
+            </th>
+            <th>
+                Thanh toán
+            </th>
+            <th>
+                Địa chỉ nhận hàng
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nguoidung.Hoten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ngaydat)
+                </td>
+                <td>
+                    @{ if (@item.Tinhtrang == 0)
+                        {
+                            <h5 style="color:red">Đang chờ xác nhận. </h5>
+                        }
+                        else if (@item.Tinhtrang == 1)
+                        {
+                            <h5 style="color:green">Đã xác nhận </h5>
+                        }
+                        else
+                        {
+                            <h5 style="color:orangered">Đang chờ xác nhận </h5>
+                        }
+                    }
+                </td>
+                <td>
+                    @{ if (@item.Thanhtoan == 1)
+                        {
+                            <div style="color:red">Thanh toán tiền mặt</div>
+                        }
+                        else if (@item.Thanhtoan == 2)
+                        {
+                            <div style="color:brown">Thanh toán chuyển khoản</div> }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diachinhanhang)
+                </td>
+                <td>
+                    <button class="btn-primary">
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.Madon }, new { @style = "color:black; "})
+                    </button>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div style="margin-top: 40px; width: 30%; ">
+    <a class="home" href="/">Quay lại trang chủ</a>
+</div>
+<h2 style="margin-bottom: 100px;"></h2>
+<style type="text/css">
+    .donhangs {
+        margin: 0 auto;
+        width: 60%;
+        border: solid 1px;
+    }
+    tr td {
+        padding: 4px;
+        border: solid 1px;
+    }
+    .btn-primary {
+        background-color: #78e8cd;
+        border-radius: 5px;
+        padding: 2px;
+        text-align: center;
+    }
+    a.home {
+        text-align: center;
+        margin-left: 304px;
+        padding: 1px;
+        border-radius: 6px;
+        background-color: gray;
+    }
+</style>

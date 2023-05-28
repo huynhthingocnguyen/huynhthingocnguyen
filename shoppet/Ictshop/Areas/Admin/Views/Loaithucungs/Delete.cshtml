@@ -1,0 +1,33 @@
+﻿@model Ictshop.Models.Loaithucung
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xoá</h2>
+
+<h3>Bạn có chắc bạn muốn xóa cái này không?</h3>
+<div>
+    <h4>Loại thú cưng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenltc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenltc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

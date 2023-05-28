@@ -1,0 +1,48 @@
+﻿@using Ictshop.Models;
+@model List<Sanpham>
+<!--
+    - #PRODUCT
+ -->
+
+
+@foreach (var item in Model)
+{
+    if (item != null && item.Masp != null && item.Anhbia != null && item.Tensp != null && item.Giatien != null)
+    {
+    <li>
+        <div class="product-card">
+            <div class="card-banner img-holder" style="--width: 360; --height: 360;">
+                <a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">
+                    <img style="cursor: pointer" src=@Url.Content("~" +item.Anhbia.ToString()) width="360" height="360" loading="lazy"
+                         alt="Commodo leo sed porta" class="img-cover">
+                    @* <img style="cursor: pointer" src=@Url.Content("~" +item.Anhbia.ToString()) width="360" height="360" loading="lazy"
+                        alt="Commodo leo sed porta" class="img-cover hover">*@
+                </a>
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = item.Masp, @strURL = Request.Url.ToString() }))
+                {
+                    <button class="card-action-btn" aria-label="add to card" title="Thêm vào giỏ hàng">
+
+                        <ion-icon name="bag-add-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                }
+            </div>
+            <div class="card-content">
+                <div class="wrapper">
+                    <div class="rating-wrapper">
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                        <ion-icon name="star" aria-hidden="true"></ion-icon>
+                    </div>
+                    <span class="span">(1)</span>
+                </div>
+                <h3 class="h3">
+                    <a href="#" class="card-title">@item.Tensp</a>
+                </h3>
+                <data class="card-price" value="15">@String.Format("{0:0,0}", @item.Giatien)₫</data>
+            </div>
+        </div>
+    </li>
+    }
+}

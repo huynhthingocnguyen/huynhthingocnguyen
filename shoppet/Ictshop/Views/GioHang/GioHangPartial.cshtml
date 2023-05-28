@@ -1,0 +1,30 @@
+﻿@*<style type="text/css">
+        .giohang{
+            color:white;
+            font-size:large
+
+        }
+
+    </style>*@
+
+@*<a href="@Url.Action("GioHang","GioHang")" class="nav-link" >Giỏ hàng
+        <i class="fa fa-shopping-cart"></i>
+        <i class="count">@ViewBag.TongSoLuong</i>
+    </a>
+    <span class="btn-badge">@ViewBag.TongSoLuong</span>*@
+
+@{ if (@ViewBag.TongSoLuong > 0)
+    {
+        <a href="/GioHang/GioHang" class="action-btn" aria-label="cart">
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+            <span class="btn-badge">@ViewBag.TongSoLuong</span>
+        </a>
+    }
+    else
+    {
+        <a href="/GioHang/GioHang" class="action-btn" aria-label="cart">
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+            <span class="btn-badge">0</span>
+        </a>
+    }
+}

@@ -1,0 +1,108 @@
+﻿@using Ictshop.Models;
+@model List<Hangsanxuat>
+
+
+@*<br />
+
+<div class="bg-success">
+
+    <h3> DANH MỤC  </h3>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-1">
+                <button class="success"><a href="#"> @item.Tenhang</a></button>
+            </div>
+        }
+    </div>
+</div>*@
+<section class="section category" aria-label="category">
+    <div class="container">
+
+        <h2 class="h2 section-title">
+            <span class="span">Danh mục</span> hàng đầu
+        </h2>
+
+        <ul class="has-scrollbar">
+
+            <li class="scrollbar-item">
+                <div class="category-card">
+
+                    <figure class="card-banner img-holder" style="--width: 330; --height: 300;">
+                        <img src="~/assets/images/category-1.jpg" style="cursor: pointer" width="330" height="300" loading="lazy" alt="Cat Food"
+                             class="img-cover">
+                    </figure>
+
+                    <h3 class="h3">
+                        <a href="#" class="card-title">Thức ăn cho mèo</a>
+                    </h3>
+
+                </div>
+            </li>
+
+            <li class="scrollbar-item">
+                <div class="category-card">
+
+                    <figure class="card-banner img-holder" style="--width: 330; --height: 300;">
+                        <img src="~/assets/images/category-2.jpg" width="330" height="300" loading="lazy" alt="Cat Toys"
+                             class="img-cover">
+                    </figure>
+
+                    <h3 class="h3">
+                        <a href="#" class="card-title">Đồ chơi mèo</a>
+                    </h3>
+
+                </div>
+            </li>
+
+            <li class="scrollbar-item">
+                <div class="category-card">
+
+                    <figure class="card-banner img-holder" style="--width: 330; --height: 300;">
+                        <img src="~/assets/images/category-3.jpg" width="330" height="300" loading="lazy" alt="Dog Food"
+                             class="img-cover">
+                    </figure>
+
+                    <h3 class="h3">
+                        <a href="#" class="card-title">Đồ chơi mèo</a>
+                    </h3>
+
+                </div>
+            </li>
+
+            <li class="scrollbar-item">
+                <div class="category-card">
+
+                    <figure class="card-banner img-holder" style="--width: 330; --height: 300;">
+                        <img src="~/assets/images/category-4.jpg" width="330" height="300" loading="lazy" alt="Dog Toys"
+                             class="img-cover">
+                    </figure>
+
+                    <h3 class="h3">
+                        <a href="#" class="card-title">Đồ chơi chó</a>
+                    </h3>
+
+                </div>
+            </li>
+
+            <li class="scrollbar-item">
+                <div class="category-card">
+
+                    <figure class="card-banner img-holder" style="--width: 330; --height: 300;">
+                        <img src="~/assets/images/category-5.jpg" width="330" height="300" loading="lazy"
+                             alt="Dog Sumpplements" class="img-cover">
+                    </figure>
+
+                    <h3 class="h3">
+                        <a href="#" class="card-title">Khác</a>
+                    </h3>
+
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+</section>

@@ -1,0 +1,93 @@
+﻿@using Ictshop.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="GioHang">
+    <h2 class="DieuDeGioHang"> GIỎ HÀNG <i class="fa fa-shopping-cart"></i></h2>
+    <br />
+    <table class="table-hover table-bordered divGioHang">
+        <tr style="">
+            <th> #</th>
+
+            <th> Tên SP</th>
+
+            <th> Ảnh bìa</th>
+
+            <th> Đơn giá</th>
+
+            <th> Số lượng</th>
+
+            <th> Thành tiền</th>
+        </tr>
+
+
+        @{
+            int counter = 1;
+        }
+        @{
+            double tongSP = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr class="font-italic">
+                <td> @counter</td>
+                @{
+                    counter++;
+                }
+                <td> @item.sTensp</td>
+
+                <td> <img src="@Url.Content("~" + item.sAnhBia)" width="50" height="50" /></td>
+
+                <td>  @String.Format("{0:0,0}", item.dDonGia)₫</td>
+
+                <td> @item.iSoLuong</td>
+
+                <td>   @String.Format("{0:0,0}", item.ThanhTien)₫</td>
+
+                @{
+                    tongSP += item.ThanhTien;
+                }
+
+            </tr>
+
+        }
+
+
+
+        <tr>
+            <td colspan="1" style="text-align:right">
+
+                @Html.ActionLink("Chỉnh sửa", "SuaGioHang")
+            </td>
+            <td colspan="5" style="text-align:right">Tổng số tiền: @String.Format("{0:0,0}", tongSP)₫</td>
+            <td colspan="6" style="text-align:right;color:blue">
+                @using (Html.BeginForm("ThanhToanDonHang", "GioHang", new { @class = "" }))
+                {
+                    <input type="submit" value="Mua Hàng" class="btn-danger" />
+                }
+            </td>
+        </tr>
+    </table>
+    <div style="margin-bottom: 100px; text-align: center;">
+        <a style=" width: 10%; background-color: cornflowerblue; border-radius: 5px; margin-left: 362px;" href="/">Trở lại trang chủ</a>
+    </div>
+</div>
+@*Css giỏ hàng*@
+<style type="text/css">
+
+    .divGioHang td {
+        padding: 10px;
+        border: 2px solid #EEEEEE;
+        text-align:center
+    }
+    .divGioHang th{
+        text-align:center
+    }
+    input.btn-danger {
+        cursor: pointer;
+        padding: 4px;
+    }
+</style>

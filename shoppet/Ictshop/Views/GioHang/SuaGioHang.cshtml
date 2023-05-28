@@ -1,0 +1,103 @@
+﻿@using Ictshop.Models;
+@model List<GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="GioHang">
+    <h2 class="DieuDeGioHang"> SỬA GIỎ HÀNG <i class="fa fa-shopping-cart"></i></h2>
+    <br />
+    <table class="table-bordered font-italic divGioHang">
+        <tr>
+            <th> #</th>
+
+            <th> Tên SP</th>
+
+            <th> Ảnh bìa</th>
+
+            <th> Đơn giá</th>
+
+            <th> Số lượng</th>
+
+            <th> Thành tiền</th>
+        </tr>
+        @{
+            int counter = 1;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @counter</td>
+                @{
+                    counter++;
+                }
+                <td> @item.sTensp</td>
+
+                <td> <img src="@Url.Content("~" +item.sAnhBia)" width="50" height="50" /></td>
+
+                <td>  @String.Format("{0:0,0}", item.dDonGia)₫  </td>
+
+                @*Chỉnh sửa giỏ hàng gọi về action CapNhatGioHang*@
+                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMasp }))
+                {
+                    <td>@Html.TextBox("txtSoLuong", item.iSoLuong, new { type = "number", @class = "quantity-input" })</td>    
+                    <td>@String.Format("{0:0,0}", item.ThanhTien)₫</td>
+                    <td>
+                        <input title="Cập nhật" type="submit" value="Cập nhật" class="btn-secondary" />
+                        @*Xóa giỏ hàng gọi về Action XoaGioHang*@
+                        <button title="Xoá" class="btn-success">@Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMasp })</button>
+                    </td>
+                }
+
+            </tr>
+        }
+    </table>
+    <a class="quaylai" href="/GioHang/GioHang">Quay lại giỏ hàng</a>
+</div>
+@*Css giỏ hàng*@
+<style type="text/css">
+    .divGioHang td {
+        padding: 10px;
+        border: 2px solid #EEEEEE;
+        text-align: center
+    }
+    a.quaylai {
+        background-color: #e1dada;
+        width: 10%;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 50px;
+        margin-left: 400px;
+    }
+    input.btn-secondary {
+        border: none;
+        background: none;
+        font-size: 16px;
+        cursor: pointer;
+        color: blue;
+    }
+    button.btn-success {
+        color: red;
+        border-radius: 5px;
+        /* border: solid 1px; */
+        font: inherit;
+        font-size: 17px;
+        float: left;
+        /* width: 40%; */
+        margin-right: 4px;
+        cursor: pointer;
+    }
+
+    .quantity-input {
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+        width: 7rem;
+    }
+
+    .divGioHang th {
+        text-align: center
+    }
+</style>

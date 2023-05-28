@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "ICT SHOP";
+
+}
+
+<main>
+    <article >
+        @Html.Action("SlidePartial", "Home")
+        @Html.Action("DanhmucPartial", "Danhmuc")
+        @Html.Action("OfferPartial", "Home")
+        <section class="section product" id="shop" aria-label="product">
+            <div class="container">
+                <h2 class="h2 section-title">
+                    <span class="span">Sản phẩm</span> nổi bật
+                </h2>
+                <ul class="grid-list">
+                    @Html.Action("tatcaPartial", "Sanpham")
+                </ul>
+            </div>
+        </section>
+        @Html.Action("ServicePartial", "Home")
+        @Html.Action("BannerPartial", "Home")
+        @Html.Action("BrandPartial", "Home")
+    </article>
+</main>
